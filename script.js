@@ -1,10 +1,24 @@
 function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.textContent = 'Message sent! We\'ll be in touch.';
+  const form = e.target;
+  const btn = form.querySelector('button');
+  btn.textContent = 'Sending...';
   btn.disabled = true;
-  btn.style.opacity = '0.7';
-  e.target.reset();
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(form)).toString()
+  })
+    .then(() => {
+      btn.textContent = 'Message sent! We\'ll be in touch.';
+      btn.style.opacity = '0.7';
+      form.reset();
+    })
+    .catch(() => {
+      btn.textContent = 'Something went wrong — please try again.';
+      btn.disabled = false;
+    });
 }
 
 // Smooth active nav highlight on scroll
