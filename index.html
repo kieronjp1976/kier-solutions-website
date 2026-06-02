@@ -175,7 +175,8 @@
       <h2 class="section-title">Ready to Get Started?</h2>
       <p class="section-sub">Whether you'd like a demo, have a question about a product, or want to discuss a custom engagement — we'd love to hear from you.</p>
 
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="form-name" value="contact" />
         <input type="text" name="name" placeholder="Your name" required />
         <input type="email" name="email" placeholder="Your email address" required />
         <input type="text" name="company" placeholder="Company (optional)" />
